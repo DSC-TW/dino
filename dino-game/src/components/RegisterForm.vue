@@ -1,83 +1,34 @@
 <template>
   <div id="app">
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-          姓名：
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light">
-          <el-input v-model="form.name" placeholder="姓名" value="form.name" name="name"></el-input>
-        </div>
-      </el-col>
-    </el-row>
-    <br><br>
-
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-          性別：
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light">
-          <el-radio-group v-model="form.gender">
-            <el-radio-button label="男" id="male" value="male"></el-radio-button>
-            <el-radio-button label="女" id="female" value="female"></el-radio-button>
-            <el-radio-button label="不願透漏" id="DeclineToAnswer" value="DeclineToAnswer"></el-radio-button>
-          </el-radio-group>
-        </div>
-      </el-col>
-    </el-row>
-    <br><br>
-
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-          Email：
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light">
-          <el-input v-model="form.email" placeholder="Email" value="form.email" name="email"></el-input>
-        </div>
-      </el-col>
-    </el-row>
-    <br><br>
-
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-          學校：
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light">
-          <el-input v-model="form.school" placeholder="學校" value="form.school" name="school"></el-input>
-        </div>
-      </el-col>
-    </el-row>
-    <br><br>
-
-    <el-row>
-      <el-col :span="8">
-        <div class="grid-content bg-purple">
-          系級/年級：
-        </div>
-      </el-col>
-      <el-col :span="16">
-        <div class="grid-content bg-purple-light">
-          <el-input v-model="form.grade" placeholder="系級/年級" value="form.grade" name="grade"></el-input>
-        </div>
-      </el-col>
-    </el-row>
-    <br><br>
-
-    <el-checkbox v-model="form.privacy">我同意<a href="https://google.com">隱私權條款</a></el-checkbox>
-    <br><br>
-
-    <el-button type="primary" icon="el-icon-check" v-on:click="check(form)">送出</el-button>
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="性別" prop="gender">
+        <el-radio-group v-model="ruleForm.gender">
+          <el-radio-button label="男"></el-radio-button>
+          <el-radio-button label="女"></el-radio-button>
+          <el-radio-button label="其他"></el-radio-button>
+          <el-radio-button label="不願透漏"></el-radio-button>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="Email" prop="email">
+        <el-input v-model="ruleForm.email"></el-input>
+      </el-form-item>
+      <el-form-item label="學校" prop="school">
+        <el-input v-model="ruleForm.school"></el-input>
+      </el-form-item>
+      <el-form-item label="系級/年級" prop="grade">
+        <el-input v-model="ruleForm.grade"></el-input>
+      </el-form-item>
+      <el-form-item label="" prop="privacy">
+        <el-checkbox v-model="ruleForm.privacy">我同意<a href="https://google.com">隱私權條款</a></el-checkbox>
+      </el-form-item>
+      
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-check" @click="submitForm('ruleForm',ruleForm)">送出</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -85,59 +36,53 @@
   export default {
     data() {
       return {
-        form:{
+        ruleForm: {
           name: '',
           gender: '',
           email: '',
           school: '',
           grade: '',
           privacy: false
+        },
+        rules: {
+          name: [
+            { required: true, message: '請輸入姓名', trigger: 'blur' }
+          ],
+          gender: [
+            { required: true, message: '請選擇性別', trigger: 'change' }
+          ],
+          email: [
+            { required: true, message: '請輸入 Email', trigger: 'blur' }
+          ],
+          school: [
+            { required: true, message: '請輸入學校', trigger: 'blur' }
+          ],
+          grade: [
+            { required: true, message: '請輸入系級/年級', trigger: 'blur' }
+          ],
+          privacy: [
+            { required: true, message: '請同意隱私權條款', trigger: 'blur' }
+          ]
         }
-      }
+      };
     },
     methods: {
-      check(form) {
-        let mess = "提示：\n"
-        let error = 0
-        if(form.name===''){
-          mess += "姓名尚未輸入\n"
-          error++
-        }
-        if(form.gender===''){
-          mess += "性別尚未選擇\n"
-          error++
-        }
-        if(form.email===''){
-          mess += "Email 尚未輸入\n"
-          error++
-        }
-        if(form.school===''){
-          mess += "學校尚未輸入\n"
-          error++
-        }
-        if(form.grade===''){
-          mess += "系級/年級尚未輸入\n"
-          error++
-        }
-        if(form.privacy===false){
-          mess += "未同意隱私權條款\n"
-          error++
-        }
-        if(error===0){
-          console.log(form)
-
-          const loading = this.$loading({
-            lock: true,
-            text: 'Loading',
-            spinner: 'el-icon-loading',
-            background: 'rgba(0, 0, 0, 0.7)'
-          });
-          setTimeout(() => {
-            loading.close();
-          }, 2000);
-
-        }
-        else alert(mess)
+      submitForm(formName,form){
+        this.$refs[formName].validate((valid) => {
+          if(valid){
+            console.log(form.privacy)
+            if(form.privacy === true){
+              alert('submit!');
+            }
+            else{
+              alert('請同意隱私權條款');
+            }
+          }
+          else{
+            console.log('error submit!!');
+            return false;
+          }
+        });
       }
     }
   }
