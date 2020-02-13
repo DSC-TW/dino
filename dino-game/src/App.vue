@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
+    
     <RegisterForm></RegisterForm>
     <Card :cardData="cardData" />
   </div>
