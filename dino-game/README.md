@@ -1,4 +1,4 @@
-# test_project
+# dino-game
 
 ## Project setup
 ```
