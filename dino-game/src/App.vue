@@ -1,48 +1,36 @@
 <template>
   <div id="app">
-    <Card :cardData="cardData" />
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/scan">Scan</router-link> |
+      <router-link to="/play">Play</router-link> |
+      <router-link to="/score">Score</router-link> |
+      <router-link to="/share">Share</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
-<script>
-  import Card from './components/Card'
-  export default {
-    name: 'app',
-    components: {
-      Card
-    },
-    data() {
-      return {
-        cardData:[
-          {
-            name:'Adam',
-            birthday:'1985.08.12',
-            mail:'adam@xxx.com'
-          },
-          {
-            name:'Jack',
-            birthday:'1980.02.23',
-            mail:'jack@xxx.com'
-          },
-          {
-            name:'Candy',
-            birthday:'1982.05.06',
-            mail:'candy@xxx.com'
-          },
-          {
-            name:'Louis',
-            birthday:'1984.11.21',
-            mail:'loui@xxx.com'
-          },
-          {
-            name:'Lurry',
-            birthday:'1982.01.17',
-            mail:'lurry@xxx.com'
-          }
-        ]
-      }
-    } 
-  }
-</script>
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-<style></style>
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
