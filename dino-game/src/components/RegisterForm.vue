@@ -22,6 +22,7 @@
         <el-input v-model="ruleForm.grade"></el-input>
       </el-form-item>
       <el-form-item label="" prop="privacy">
+        <!-- <el-input v-model="ruleForm.privacy"></el-input> -->
         <el-checkbox v-model="ruleForm.privacy">我同意<a href="https://google.com">隱私權條款</a></el-checkbox>
       </el-form-item>
       
