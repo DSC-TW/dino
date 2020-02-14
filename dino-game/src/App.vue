@@ -1,21 +1,23 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    
-    <RegisterForm></RegisterForm>
-    <Card :cardData="cardData" />
+    <RankingBoard/>
+    <!-- <RegisterForm></RegisterForm>
+    <Card :cardData="cardData" /> -->
   </div>
 </template>
 
 <script>
-import RegisterForm from './components/RegisterForm.vue'
-import Card from './components/Card.vue'
+// import RegisterForm from './components/RegisterForm.vue'
+import RankingBoard from './components/RankingBoard'
+// import Card from './components/Card.vue'
 
 export default {
   name: 'app',
   components: {
-    Card,
-    RegisterForm
+    // Card,
+    // RegisterForm,
+    RankingBoard
   },
     data() {
       return {
