@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/register">Register</router-link> |
@@ -34,3 +35,18 @@
   color: #42b983;
 }
 </style>
+
+<!--
+<script>
+import RegisterForm from './components/RegisterForm.vue'
+import RankingBoard from './components/RankingBoard'
+// import Card from './components/Card.vue'
+
+export default {
+  name: 'app',
+  components: {
+
+  },
+}
+</script>
+-->
