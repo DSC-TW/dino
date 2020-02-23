@@ -74,6 +74,18 @@
             console.log(form.privacy)
             if(form.privacy === true){
               alert('submit!');
+
+              this.$http.post('https://littlechintw.github.io/sampledata/register')
+              .then((response) => {
+                console.log(response)
+              })
+              .catch((response) => {
+                console.log(response)
+              })
+              // .finally(() => {
+              //   /* 不論成功失敗，都做些事 */
+              // });
+
             }
             else{
               alert('請同意隱私權條款');
