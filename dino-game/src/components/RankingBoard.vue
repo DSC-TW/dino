@@ -8,12 +8,16 @@
       <el-table-column
         prop="ranking"
         label="排名"
-        width="180">
+        width="40">
       </el-table-column>
       <el-table-column
         prop="score"
         label="分數"
-        width="180">
+        width="60">
+      </el-table-column>
+      <el-table-column
+        prop="email"
+        label="email">
       </el-table-column>
       <el-table-column
         prop="name"
@@ -23,51 +27,62 @@
   </div>
 </template>
 
+// [{
+//   ranking: '1',
+//   score: '100',
+//   name: '小明',
+//   email: 'xxx'
+// }, {
+//   ranking: '2',
+//   score: '90',
+//   name: '小名',
+//   email: 'xxx'
+// }, {
+//   ranking: '3',
+//   score: '80',
+//   name: '小銘',
+//   email: 'xxx'
+// }, {
+//   ranking: '4',
+//   score: '70',
+//   name: '小鳴',
+//   email: 'xxx'
+// }, {
+//   ranking: '5',
+//   score: '60',
+//   name: '小茗',
+//   email: 'xxx'
+// }]
+
 <script>
   export default {
     data() {
       return {
-        tableData: [{
-          ranking: '1',
-          score: '100',
-          name: '小明'
-        }, {
-          ranking: '2',
-          score: '90',
-          name: '小名'
-        }, {
-          ranking: '3',
-          score: '80',
-          name: '小銘'
-        }, {
-          ranking: '4',
-          score: '70',
-          name: '小鳴'
-        }, {
-          ranking: '5',
-          score: '60',
-          name: '小茗'
-        }]
+        tableData: []
       };
     },
     methods: {
-      submitForm(formName,form){
-        this.$refs[formName].validate((valid) => {
-          if(valid){
-            console.log(form.privacy)
-            if(form.privacy === true){
-              alert('submit!');
-            }
-            else{
-              alert('請同意隱私權條款');
-            }
-          }
-          else{
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      }
+      
+    },
+    created: function () {
+      // alert('hi');
+      this.$http.get('https://jamfly.dev/api/rank')
+      .then((response) => {
+        console.log(response)
+        for (var i = 0; i < response.body.length; i++) {
+          let jsondata = {"ranking":i+1, "score":response.body[i]['score'], "name":response.body[i]['name'], "email":response.body[i]['email']}
+          this.tableData.push(jsondata)
+          // console.log(response.body[i]['name'])
+          // let ranking = i + 1
+          // let name = response.body[i]['name']
+          // let mail = response.body[i]['mail']
+          // let score = response.body[i]['score']
+        }
+
+      })
+      .catch((response) => {
+        console.log(response)
+      })
     }
   }
 </script>
