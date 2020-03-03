@@ -117,6 +117,17 @@
           }
         });
       }
+    },
+    created: function () {
+      let userid = this.$cookie.get('userID')
+      console.log(userid)
+      if(userid){
+        alert('你已經註冊了！')
+        this.test = userid
+        this.qrcode = userid
+        this.qrcode_show = true
+        this.form_show = false
+      }
     }
   }
 </script>
