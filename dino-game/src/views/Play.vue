@@ -1,5 +1,15 @@
+
 <template>
   <div id="play">
-    <h1>This is a play page</h1>
+    <Dino/>
   </div>
 </template>
+<script>
+import Dino from '../components/PlayDino.vue'
+export default {
+  name: 'play',
+  components: {
+    Dino
+  }
+}
+</script>
